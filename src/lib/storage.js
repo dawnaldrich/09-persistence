@@ -1,10 +1,13 @@
 'use strict';
 
 const logger = require('./logger');
+
 const storage = module.exports = {};
 const Promise = require('bluebird');
+
 const fs = Promise.promisifyAll(require('fs'), { suffix: 'Prom' });
-//const memory = {};
+
+const memory = {};
 
 // schema is the type of resource (frog)
 storage.create = function create(schema, item) {
@@ -42,55 +45,42 @@ storage.fetchOne = function fetchOne(schema, id) {
       logger.log(logger.ERROR, JSON.stringify(err));
     });
 
-  storage.update = function update() {
+  // storage.update = function update() {
+  //
+  //
+  // };
+  //
+  // storage.delete = function del() {
+  //
+  // };
+};
 
 
-  };
+storage.fetchAll = function fetchAll(schema) {
+  return new Promise((resolve, reject) => {
+    if (!schema) return reject(new Error('expected schema name'));
+    // if (!memory[schema]) return reject(new Error('schema not found'));
 
-  storage.delete = function del() {
+    const allItems = Object.values(memory[schema]);
+    const frog = allItems.map(frogs => frogs.id);
 
-  };
-}
-//
-// storage.fetchOne = function fetchOne(schema, id) {
-//   return new Promise((resolve, reject) => {
-//     if (!schema) return reject(new Error('expected schema name'));
-//     if (!id) return reject(new Error('expected id'));
-//    // if (!memory[schema]) return reject(new Error('schema not found'));
-//     const item = memory[schema][id];
-//
-//     if (!item) {
-//       return reject(new Error('item not found'));
-//     }
-//     return resolve(item);
-//   });
-// };
-//
-// storage.fetchAll = function fetchAll(schema) {
-//   return new Promise((resolve, reject) => {
-//     if (!schema) return reject(new Error('expected schema name'));
-//     // if (!memory[schema]) return reject(new Error('schema not found'));
-//
-//     const allItems = Object.values(memory[schema]);
-//     const frog = allItems.map(frogs => frogs.id);
-//
-//     if (!frog) {
-//       return reject(new Error('object not found'));
-//     }
-//     return resolve(frog);
-//   });
-// };
-//
-// storage.delete = function del(schema, id) {
-//   return new Promise((resolve, reject) => {
-//     if (!schema) return reject(new Error('expected schema name'));
-//     if (!id) return reject(new Error('expected id'));
-//     if (!memory[schema]) return reject(new Error('schema not found'));
-//
-//     const item = memory[schema][id];
-//     delete memory[schema][id];
-//
-//     return resolve(item);
-//   });
-//};
+    if (!frog) {
+      return reject(new Error('object not found'));
+    }
+    return resolve(frog);
+  });
+};
+
+storage.delete = function del(schema, id) {
+  return new Promise((resolve, reject) => {
+    if (!schema) return reject(new Error('expected schema name'));
+    if (!id) return reject(new Error('expected id'));
+    if (!memory[schema]) return reject(new Error('schema not found'));
+
+    const item = memory[schema][id];
+    delete memory[schema][id];
+
+    return resolve(item);
+  });
+};
 

@@ -2,7 +2,7 @@
 
 const response = module.exports = {};
 
-response.sendJSON = (res, status, date) => {
+response.sendJSON = (res, status, data) => {
   res.writeHead(status, { 'Content-Type': 'application/json' });
   res.write(JSON.stringify(data));
   res.end();
