@@ -40,7 +40,7 @@ Router.prototype.route = function route() {
           this.routes[req.method][req.url.pathname](req, res);
           return;
         }
-          response.sendText(res, 404, 'Route Not Found FROM HERE');
+        response.sendText(res, 404, 'Route Not Found FROM HERE');
         // res.writeHead(404, { 'Content-Type': 'text/plain' });
         // res.write('Route Not Found FROM HERE');
         // res.end();
