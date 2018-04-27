@@ -1,29 +1,24 @@
-![cf](https://i.imgur.com/7v5ASc8.png) Lab 09: Vanilla REST API w/ Persistence
-======
+Lab 09: Persistence
+Author: Dawn Version: 1.0.0
 
-## Submission Instructions
-  * fork this repository & create a new branch for your work
-  * push to your repository
-  * submit a pull request to this repository
-  * submit a link to your PR in canvas
-  * write a question and observation on canvas
+Overview
+vanilla REST API
+refactor routes to be contained in a separate module
+refactor your res messages & status codes to be contained in a separate module (ex: response.js)
+refactor the storage.js module to use file system persistence
+use the fs module to create and read the associated data files
+the name of the file should contain the related resource id
 
-## Learning Objectives  
-* students will learn how to save resource data to the file system for a layer of data persistence
-* students will learn how to refactor commonly used coding constructs into custom helper modules
+Getting Started
+Clone the repo
+npm init -y
+npm i -D eslint-config-airbnb-base eslint-plugin-import eslint-plugin-jest jest babel eslint babel-preset-env babel-eslint babel-register
+npm i winston@next faker dotenv --save cowsay
+npm i superagent
+npm i uuid
+npm i bluebeard
 
-## Requirements
 
-#### Configuration
-* Reference the file structure of [this template](https://github.com/codefellows/seattle-javascript-401d23/tree/master/back-end/00-empty-template) for the configuration files you need and folder structure
-* `README.md`
-  * your `README.md` should include detailed instructions on how to use your API
-  * this should include documentation on how to access your API endpoints
+Architecture
+node, express, jQuery, javascript, babel
 
-#### Feature Tasks
-* continue working on your vanilla REST API
-* refactor your routes to be contained in a separate module (ex: `route/resource-route.js`)
-* refactor your `res` messages & status codes to be contained in a separate module (ex: `response.js`)
-* refactor the `storage.js` module to use file system persistence
-  * use the `fs` module to create and read the associated data files
-  * the name of the file should contain the related resource id
